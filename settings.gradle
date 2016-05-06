@@ -1,0 +1,1 @@
+include ':app', ':systemwidgetdemo', ':customviewdemo', ':utils', ':animationdemo', ':designpattern', ':arithmetic'
