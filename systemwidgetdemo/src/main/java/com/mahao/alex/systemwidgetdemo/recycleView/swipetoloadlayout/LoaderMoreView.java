@@ -11,9 +11,6 @@ import com.aspsine.swipetoloadlayout.SwipeTrigger;
 import com.mahao.alex.systemwidgetdemo.R;
 
 
-/**
- * Created by 蔡小木 on 2016/3/6 0006.
- */
 public class LoaderMoreView extends TextView implements SwipeTrigger, SwipeLoadMoreTrigger {
     public LoaderMoreView(Context context) {
         super(context);

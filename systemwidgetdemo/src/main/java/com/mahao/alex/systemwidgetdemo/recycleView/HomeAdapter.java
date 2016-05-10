@@ -45,10 +45,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
 
 
-        /* 瀑布流实现时，修改itemView的高度
+        // 瀑布流实现时，修改itemView的高度
         ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
         layoutParams.height = (int) (Math.random()*150+100);
-        holder.itemView.setLayoutParams(layoutParams);*/
+        holder.itemView.setLayoutParams(layoutParams);
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

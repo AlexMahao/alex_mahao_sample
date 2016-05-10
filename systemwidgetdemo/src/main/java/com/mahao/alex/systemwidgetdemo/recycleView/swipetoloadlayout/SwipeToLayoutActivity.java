@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
@@ -13,9 +13,6 @@ import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.mahao.alex.systemwidgetdemo.R;
 import com.mahao.alex.systemwidgetdemo.recycleView.DividerItemDecoration;
 import com.mahao.alex.systemwidgetdemo.recycleView.HomeAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -39,7 +36,6 @@ public class SwipeToLayoutActivity extends AppCompatActivity implements OnRefres
     private RecyclerView mRecycleView;
 
     SwipeToLoadLayout swipeToLoadLayout;
-    private List<String> datas = new ArrayList<>();
 
     private HomeAdapter adapter;
 
@@ -58,9 +54,11 @@ public class SwipeToLayoutActivity extends AppCompatActivity implements OnRefres
 
         adapter = new HomeAdapter();
 
-        //设置垂直的线性布局管理器，Orientation -->   VERTICAL:垂直   HORIZONTAL:水平
+        /*//设置垂直的线性布局管理器，Orientation -->   VERTICAL:垂直   HORIZONTAL:水平
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);*/
+
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
 
         //添加分割线
         mRecycleView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL_LIST));
@@ -71,7 +69,7 @@ public class SwipeToLayoutActivity extends AppCompatActivity implements OnRefres
 
         mRecycleView.setAdapter(adapter);
 
-
+        adapter.refresh();
         swipeToLoadLayout.setOnRefreshListener(this);
         swipeToLoadLayout.setOnLoadMoreListener(this);
 
