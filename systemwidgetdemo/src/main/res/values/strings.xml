@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">SystemWidgetDemo</string>
+
+    <string name="common_loading">正在加载…</string>
+    <string name="common_loading_error">加载失败，请检查网络！</string>
+    <string name="common_view_loading">正在拼命加载数据…</string>
+    <string name="common_view_release">释放加载</string>
+    <string name="common_view_loading_ok">加载成功</string>
+    <string name="common_i_know">知道了</string>
+    <string name="comon_retry">重试</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_swipe_to_load_more">上拉加载更多</string>
+    <string name="common_load_more">加载更多</string>
+    <string name="common_load_complete">加载完成</string>
+    <string name="common_refresh_complete">刷新完成</string>
+    <string name="common_swipe_to_refresh">下拉刷新</string>
+    <string name="common_set_read">标记为已读</string>
+    <string name="common_set_unread">标记为未读</string>
 </resources>
