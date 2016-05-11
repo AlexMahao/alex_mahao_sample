@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!--
+
+android:ordering 设置动画的时序关系，取值可为以下两个值之一：
+        together 动画同时执行，默认值
+        sequentially 动画按顺序执行
+
+-->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ordering="sequentially"
+    >
+
+    <objectAnimator
+        android:propertyName="rotation"
+        android:valueTo="360"
+        android:valueFrom="0"
+        android:valueType="floatType"
+        android:duration="1000"/>
+
+
+
+    <set android:ordering="together">
+
+        <objectAnimator
+            android:propertyName="scaleY"
+            android:valueFrom="1"
+            android:valueTo="0"
+            android:valueType="floatType"
+            android:duration="1000"
+        />
+
+        <objectAnimator
+            android:propertyName="scaleX"
+            android:valueFrom="1"
+            android:valueTo="0"
+            android:valueType="floatType"
+            android:duration="1000"
+            />
+
+    </set>
+
+
+</set>

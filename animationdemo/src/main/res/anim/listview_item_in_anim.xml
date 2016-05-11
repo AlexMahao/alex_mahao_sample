@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layoutAnimation xmlns:android="http://schemas.android.com/apk/res/android"
+    android:delay="30%"
+    android:animationOrder="normal"
+    android:animation="@anim/listview_item_anim"
+    >
+
+    <!--
+    android:delay 子类动画时间间隔 （延迟） 70% 也可以是一个浮点数 如“1.2”等
+    android:animationOrder=”random” 子类的显示方式 random表示随机
+    android:animationOrder 的取值有
+        normal 0 默认
+        reverse 1 倒序
+        random 2 随机
+    android:animation=”@anim/left” 表示孩子显示时的具体动画是什么代
+
+    -->
+
+</layoutAnimation>
