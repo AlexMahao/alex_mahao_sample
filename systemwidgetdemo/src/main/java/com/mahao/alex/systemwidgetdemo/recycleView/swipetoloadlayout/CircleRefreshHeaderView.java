@@ -58,7 +58,7 @@ public class CircleRefreshHeaderView extends RelativeLayout implements SwipeTrig
 
         mDescText = new TextView(getContext());
 
-        LinearLayout.LayoutParams descParams = new LinearLayout.LayoutParams(circlewidth*2, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams descParams = new LinearLayout.LayoutParams(circlewidth*3, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         descParams.gravity = Gravity.CENTER;
         descParams.setMargins(circlewidth/2,0,0,0);
@@ -73,6 +73,7 @@ public class CircleRefreshHeaderView extends RelativeLayout implements SwipeTrig
         llParams.addRule(CENTER_IN_PARENT);
         ll.setLayoutParams(llParams);
         ll.setPadding(10,10,10,10);
+
         ll.addView(mCircleView);
         ll.addView(mDescText);
 
@@ -81,6 +82,8 @@ public class CircleRefreshHeaderView extends RelativeLayout implements SwipeTrig
 
     @Override
     public void onRefresh() {
+
+        //开始刷新，启动动画
         anim = ObjectAnimator.ofFloat(mCircleView, "rotation", mCircleView.getRotation(), mCircleView.getRotation()+360f)
                 .setDuration(500);
         anim.setRepeatCount(ValueAnimator.INFINITE);
@@ -104,6 +107,7 @@ public class CircleRefreshHeaderView extends RelativeLayout implements SwipeTrig
                 mDescText.setText("松开刷新更多");
             }
 
+            //如果是仍在下拉状态，则圆环跟随滑动进行滚动
             if (!isRelease)
                 mCircleView.setRotation(((float) yScroll) / getHeight() * 360f);
         }
@@ -124,6 +128,7 @@ public class CircleRefreshHeaderView extends RelativeLayout implements SwipeTrig
 
     @Override
     public void onReset() {
+        //重置时，将动画置为初始状态
         mCircleView.setRotation(0f);
     }
 }

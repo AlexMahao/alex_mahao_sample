@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 /**
  *  // 动画偏移量  http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0619/3090.html
+ *
+ *  LayoutAnimationController 布局初始化操作时的动画 LayoutTranslation,
  * ListView 等ViewGroup进入时的动画效果
  * Created by Alex_MaHao on 2016/5/11.
  */
@@ -42,16 +44,18 @@ public class ListViewFadeInAnimActivity extends AppCompatActivity {
         //通过加载XML动画设置文件来创建一个Animation对象；
         Animation animation= AnimationUtils.loadAnimation(this, R.anim.listview_item_anim);   //得到一个LayoutAnimationController对象；
         LayoutAnimationController controller = new LayoutAnimationController(animation);   //设置控件显示的顺序；
-        controller.setOrder(LayoutAnimationController.ORDER_REVERSE);   //设置控件显示间隔时间；
+        controller.setOrder(LayoutAnimationController.ORDER_NORMAL);   //设置控件显示间隔时间；
         controller.setDelay(0.3f);   //为ListView设置LayoutAnimationController属性；
         mListView.setLayoutAnimation(controller);
 
 
+       // mListView.setLayoutTransition(new LayoutTransition());
+
         datas = new ArrayList();
 
-        for (int i = 0;i<3;i++){
+     /*   for (int i = 0;i<3;i++){
             datas.add(i+"");
-        }
+        }*/
         adapter = new BaseAdapter() {
             @Override
             public int getCount() {
@@ -82,7 +86,13 @@ public class ListViewFadeInAnimActivity extends AppCompatActivity {
                 textView.setPadding(10,40,10,40);
                 textView.setBackgroundColor(Color.RED);
                 textView.setTextColor(Color.WHITE);
+
                 return textView;
+            }
+
+
+            public void onenotify(){
+
             }
         };
         mListView.setAdapter(adapter);
@@ -97,17 +107,18 @@ public class ListViewFadeInAnimActivity extends AppCompatActivity {
         }
 
         adapter.notifyDataSetChanged();
+        mListView.startLayoutAnimation();
     }
 
 
     public void add(View view){
-        for (int i = 0;i<3;i++){
+        for (int i = 0;i<20;i++){
             datas.add(i+"");
         }
 
         adapter.notifyDataSetChanged();
-        //mListView.startLayoutAnimation();
-        mListView.requestLayout();
+
+
     }
 
 

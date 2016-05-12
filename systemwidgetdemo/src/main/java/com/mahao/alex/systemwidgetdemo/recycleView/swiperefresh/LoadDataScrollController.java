@@ -8,7 +8,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 
 /**
  * 实现上拉加载的监听：加载条件：滑动到最后，且是停止状态，则开始加载数据
- * 需要判断两个，1，当前是否是向下滑动
  * Created by Alex_MaHao on 2016/5/10.
  */
 public  class LoadDataScrollController extends RecyclerView.OnScrollListener implements SwipeRefreshLayout.OnRefreshListener {
@@ -50,9 +49,12 @@ public  class LoadDataScrollController extends RecyclerView.OnScrollListener imp
     @Override
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
+        /**
+         * 获取布局参数
+         */
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
 
-        //如果为null，第一次运行，确定布局惯例其
+        //如果为null，第一次运行，确定布局类型
         if (mLayoutManagerType == null) {
             if (layoutManager instanceof LinearLayoutManager) {
                 mLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT;
@@ -65,6 +67,7 @@ public  class LoadDataScrollController extends RecyclerView.OnScrollListener imp
             }
         }
 
+        //对于不太能够的布局参数，不同的方法获取到当前显示的最后一个条目数
         switch (mLayoutManagerType) {
             case LINEAR_LAYOUT:
                 mLastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
@@ -98,6 +101,7 @@ public  class LoadDataScrollController extends RecyclerView.OnScrollListener imp
         int totalCount = layoutManager.getItemCount();
 
 
+        // 四个条件，分别是是否有数据，状态是否是滑动停止状态，显示的最大条目是否大于整个数据（注意偏移量），是否正在加载数据
         if(visibleCount>0
                 &&newState==RecyclerView.SCROLL_STATE_IDLE
                 &&mLastVisibleItemPosition>=totalCount-1
@@ -140,7 +144,9 @@ public  class LoadDataScrollController extends RecyclerView.OnScrollListener imp
 
     }
 
-
+    /**
+     * 数据加载接口回调
+     */
     interface OnRecycleRefreshListener{
         void refresh();
         void loadMore();

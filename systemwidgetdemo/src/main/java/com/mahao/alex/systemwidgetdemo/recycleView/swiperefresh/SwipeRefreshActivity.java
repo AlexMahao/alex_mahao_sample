@@ -28,7 +28,10 @@ public class SwipeRefreshActivity extends AppCompatActivity implements LoadDataS
     private RecyclerView mRecycle;
 
     private HomeAdapter mAdapter;
+
     private LoadDataScrollController mController;
+
+
     private ProgressDialog pd;
 
     @Override
@@ -43,9 +46,12 @@ public class SwipeRefreshActivity extends AppCompatActivity implements LoadDataS
 
         mSwipeRefresh.setColorSchemeColors(Color.RED,Color.GREEN,Color.BLUE);
 
+        /**
+         * 创建控制器，同时使当前activity实现数据监听回调接口
+         */
         mController = new LoadDataScrollController(this);
 
-        mSwipeRefresh.setOnRefreshListener(mController);
+
 
         mAdapter = new HomeAdapter();
 
@@ -67,11 +73,18 @@ public class SwipeRefreshActivity extends AppCompatActivity implements LoadDataS
 
         mAdapter.refresh();
 
+        /**
+         * 设置监听
+         */
         mRecycle.addOnScrollListener(mController);
+
+        mSwipeRefresh.setOnRefreshListener(mController);
+
     }
 
     @Override
     public void refresh() {
+        //刷新的接口调
         mSwipeRefresh.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -84,13 +97,14 @@ public class SwipeRefreshActivity extends AppCompatActivity implements LoadDataS
 
     @Override
     public void loadMore() {
-
+        //加载更多的接口回调
         pd = new ProgressDialog(this);
         pd.show();
         mSwipeRefresh.postDelayed(new Runnable() {
             @Override
             public void run() {
                 mAdapter.add();
+                //设置数据加载结束的监听状态
                 mController.setLoadDataStatus(false);
                 pd.dismiss();
             }

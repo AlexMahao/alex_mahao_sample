@@ -12,6 +12,7 @@ import com.mahao.alex.systemwidgetdemo.R;
 
 
 public class LoaderMoreView extends TextView implements SwipeTrigger, SwipeLoadMoreTrigger {
+
     public LoaderMoreView(Context context) {
         super(context);
     }

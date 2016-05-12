@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
@@ -54,11 +54,11 @@ public class SwipeToLayoutActivity extends AppCompatActivity implements OnRefres
 
         adapter = new HomeAdapter();
 
-        /*//设置垂直的线性布局管理器，Orientation -->   VERTICAL:垂直   HORIZONTAL:水平
+        //设置垂直的线性布局管理器，Orientation -->   VERTICAL:垂直   HORIZONTAL:水平
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);*/
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
 
         //添加分割线
         mRecycleView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL_LIST));
@@ -70,6 +70,10 @@ public class SwipeToLayoutActivity extends AppCompatActivity implements OnRefres
         mRecycleView.setAdapter(adapter);
 
         adapter.refresh();
+
+        /**
+         * 设置下拉刷新和上拉加载监听
+         */
         swipeToLoadLayout.setOnRefreshListener(this);
         swipeToLoadLayout.setOnLoadMoreListener(this);
 
@@ -83,7 +87,7 @@ public class SwipeToLayoutActivity extends AppCompatActivity implements OnRefres
         swipeToLoadLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
-                adapter.add();
+                adapter.refresh();
                 swipeToLoadLayout.setRefreshing(false);
             }
         },2000);
@@ -94,7 +98,8 @@ public class SwipeToLayoutActivity extends AppCompatActivity implements OnRefres
         swipeToLoadLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
-                adapter.refresh();
+
+                adapter.add();
                 swipeToLoadLayout.setLoadingMore(false);
             }
         },2000);

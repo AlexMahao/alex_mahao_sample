@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import com.mahao.alex.animationdemo.R;
 
 /**
- * 布局动画，适用于ViewGroup
+ * 布局动画，适用于ViewGroup   LayoutTransition    不会影响初始化操作
  * --如果在ViewGroup的xml文件上添加：android:animateLayoutChanges="true" 则会有默认的动画效果
  * <p/>
  * <p/>

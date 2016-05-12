@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.aspsine.swipetoloadlayout.SwipeRefreshTrigger;
 import com.aspsine.swipetoloadlayout.SwipeTrigger;
-import com.mahao.alex.systemwidgetdemo.R;
 
 
 /**
@@ -54,14 +53,11 @@ public class RefreshHeaderView extends TextView implements SwipeRefreshTrigger, 
         if (!isComplete) {
             //当前Y轴偏移量大于控件高度时，标识下拉到界限，显示“松开已刷新”
             if (yScrolled >= getHeight()) {
-                setText(R.string.common_view_release);
+
             } else {
                 //未达到偏移量
-                setText(R.string.common_swipe_to_refresh);
-            }
-        } else {
 
-            setText(R.string.common_view_loading_ok);
+            }
         }
         Log.i("info","onMove");
     }
