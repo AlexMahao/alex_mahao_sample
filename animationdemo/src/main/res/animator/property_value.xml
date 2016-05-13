@@ -6,4 +6,11 @@
     android:valueType="floatType"
     >
 
+    <!--
+        valueFrom: 初始值
+        valueTo：结束值
+        valueType：值得类型
+        propertyName:动画作用的属性
+
+    -->
 </animator>

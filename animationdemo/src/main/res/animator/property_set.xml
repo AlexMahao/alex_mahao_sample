@@ -2,10 +2,10 @@
 
 
 <!--
-
 android:ordering 设置动画的时序关系，取值可为以下两个值之一：
         together 动画同时执行，默认值
-        sequentially 动画按顺序执行
+        sequentially 动画按顺序执行 即代码的从上往下，
+            - 对于当前例子来说，限制性旋转，再执行缩放。
 
 -->
 <set xmlns:android="http://schemas.android.com/apk/res/android"

@@ -9,7 +9,7 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name=".custom_anim.RecycleViewFadeInAnimActivity">
+        <activity android:name=".layout_transition.LayoutTransitionActivity">
 
             <intent-filter>
 

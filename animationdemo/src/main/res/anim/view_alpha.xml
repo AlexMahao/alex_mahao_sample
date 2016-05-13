@@ -4,7 +4,11 @@
     android:repeatMode="reverse"
     android:repeatCount="1"
     android:fromAlpha="1"
-    android:toAlpha="0.5"
+    android:toAlpha="0"
     >
+    <!--
+    fromAlpha  : 初始透明度
+    toAlpha： 目标透明度
+    -->
 
 </alpha>

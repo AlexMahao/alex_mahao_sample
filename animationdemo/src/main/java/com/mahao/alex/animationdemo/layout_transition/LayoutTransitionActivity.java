@@ -10,6 +10,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -54,6 +58,7 @@ public class LayoutTransitionActivity extends AppCompatActivity {
         //view 进入
         ObjectAnimator animator1 = ObjectAnimator.ofFloat(null, "rotationY", -90f, 0f)
                 .setDuration(mTransition.getDuration(LayoutTransition.APPEARING));
+        animator1.setInterpolator(new LinearInterpolator());
         mTransition.setAnimator(LayoutTransition.APPEARING, animator1);
 
         //view 退出
@@ -88,8 +93,17 @@ public class LayoutTransitionActivity extends AppCompatActivity {
         });
 
 
-        //控件小时对其他控件的影响
+        //控件消失对其他控件的影响，类似于上面的，偷懒了
         mTransition.setAnimator(LayoutTransition.CHANGE_DISAPPEARING, animator3);
+
+
+
+        //通过加载XML动画设置文件来创建一个Animation对象；
+        Animation animation= AnimationUtils.loadAnimation(this, R.anim.listview_item_anim);   //得到一个LayoutAnimationController对象；
+        LayoutAnimationController controller = new LayoutAnimationController(animation);   //设置控件显示的顺序；
+        controller.setOrder(LayoutAnimationController.ORDER_NORMAL);   //设置控件显示间隔时间；
+        controller.setDelay(0.3f);   //为ListView设置LayoutAnimationController属性；
+        mParent.setLayoutAnimation(controller);
 
     }
 

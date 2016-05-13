@@ -3,6 +3,14 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <Button
+        android:text="获取验证码"
+        android:onClick="startTime"
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <ImageView
         android:layout_centerInParent="true"
         android:id="@+id/property_img"

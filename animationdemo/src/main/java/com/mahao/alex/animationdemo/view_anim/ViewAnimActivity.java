@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
@@ -53,17 +52,21 @@ public class ViewAnimActivity  extends AppCompatActivity{
 
 
     public void alpha(View view){
+        //初始透明度，结束时的透明度  取值范围1.0~0.0
         AlphaAnimation anim= new AlphaAnimation(1,0);
         //RepeatCount ,动画执行结束后的重复次数，如果大于0，则重复次数。默认是0
         //如果小于0，默认是Animation.INFINITE
-        anim.setRepeatCount(1); //重复0次
-        anim.setRepeatMode(Animation.REVERSE);  //Animation.RESTART  从头开始。  Animation.REVERSE :反转
+        anim.setRepeatCount(1); //重复1次
+        //Animation.RESTART  从头开始。  Animation.REVERSE :反转
+        anim.setRepeatMode(Animation.REVERSE);
         anim.setDuration(1000);
 
-        //透明度动画 xml
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.view_alpha);;
 
         img.startAnimation(anim);
+
+        //透明度动画 xml
+        // Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.view_alpha);;
+
     }
 
     public void rotate(View view){
@@ -74,7 +77,9 @@ public class ViewAnimActivity  extends AppCompatActivity{
         // pivotYValue pivotXValue  ==>   0%~1% //默认0
         RotateAnimation anim = new RotateAnimation(0f,180f,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
         anim.setDuration(500);
-        anim.setFillAfter(true); //设置为true ，则保持动画结束后的状态，默认false
+        //设置为true ，则保持动画结束后的状态，默认false
+        anim.setFillAfter(true);
+
         img.startAnimation(anim);
 
         //xml  R.anim.view_rotate.xml
