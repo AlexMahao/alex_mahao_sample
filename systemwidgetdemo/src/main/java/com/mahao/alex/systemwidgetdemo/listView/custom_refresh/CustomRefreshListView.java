@@ -1,4 +1,4 @@
-package com.mahao.alex.systemwidgetdemo.custom_refresh;
+package com.mahao.alex.systemwidgetdemo.listView.custom_refresh;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -19,33 +19,75 @@ import java.util.Date;
 
 public class CustomRefreshListView extends ListView implements OnScrollListener{
 
-	private View headerView;//headerView
+	/**
+	 * 头布局
+	 */
+	private View headerView;
 
-	private ImageView iv_arrow;//旋转的图片
+	/**
+	 * 头部布局的高度
+	 */
+	private int headerViewHeight;
 
+	/**
+	 * 头部旋转的图片
+	 */
+	private ImageView iv_arrow;
+
+	/**
+	 * 头部下拉刷新时状态的描述
+	 */
+	private TextView tv_state;
+
+	/**
+	 * 下拉刷新时间的显示控件
+	 */
+	private TextView tv_time;
+
+
+	/**
+	 * 底部布局
+	 */
+	private View footerView;
+
+	/**
+	 * 底部旋转progressbar
+	 */
 	private ProgressBar pb_rotate;
 
-	private TextView tv_state,tv_time;
-	private View footerView;
+
+	/**
+	 * 底部布局的高度
+	 */
 	private int footerViewHeight;
-	
-	private int headerViewHeight;//headerView高
-	
-	private int downY;//按下时y坐标
+
+
+	/**
+	 * 按下时的Y坐标
+	 */
+	private int downY;
 	
 	private final int PULL_REFRESH = 0;//下拉刷新的状态
 	private final int RELEASE_REFRESH = 1;//松开刷新的状态
 	private final int REFRESHING = 2;//正在刷新的状态
 
+	/**
+	 * 当前下拉刷新处于的状态
+	 */
 	private int currentState = PULL_REFRESH;
-	
+
+	/**
+	 * 头部布局在下拉刷新改变时，图标的动画
+	 */
 	private RotateAnimation upAnimation,downAnimation;
-	
-	private boolean isLoadingMore = false;//当前是否正在处于加载更多
+
+	/**
+	 * 当前是否在加载数据
+	 */
+	private boolean isLoadingMore = false;
 
 	public CustomRefreshListView(Context context) {
-		super(context);
-		init();
+		this(context,null);
 	}
 
 	public CustomRefreshListView(Context context, AttributeSet attrs) {
@@ -54,9 +96,13 @@ public class CustomRefreshListView extends ListView implements OnScrollListener{
 	}
 	
 	private void init(){
+		//设置滑动监听
 		setOnScrollListener(this);
+		//初始化头布局
 		initHeaderView();
+		//初始化头布局中图标的旋转动画
 		initRotateAnimation();
+		//初始化为尾布局
 		initFooterView();
 	}
 
@@ -70,11 +116,14 @@ public class CustomRefreshListView extends ListView implements OnScrollListener{
 		pb_rotate = (ProgressBar) headerView.findViewById(R.id.pb_rotate);
 		tv_state = (TextView) headerView.findViewById(R.id.tv_state);
 		tv_time = (TextView) headerView.findViewById(R.id.tv_time);
-		
-		headerView.measure(0, 0);//主动通知系统去测量该view;
+
+		//测量headView的高度
+		headerView.measure(0, 0);
+		//获取高度，并保存
 		headerViewHeight = headerView.getMeasuredHeight();
+		//设置paddingTop = -headerViewHeight;这样，该控件被隐藏
 		headerView.setPadding(0, -headerViewHeight, 0, 0);
-		
+		//添加头布局
 		addHeaderView(headerView);
 	}
 	
@@ -82,21 +131,24 @@ public class CustomRefreshListView extends ListView implements OnScrollListener{
 	 * 初始化旋转动画
 	 */
 	private void initRotateAnimation() {
+
 		upAnimation = new RotateAnimation(0, -180, 
 				RotateAnimation.RELATIVE_TO_SELF, 0.5f,
 				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
 		upAnimation.setDuration(300);
 		upAnimation.setFillAfter(true);
+
 		downAnimation = new RotateAnimation(-180, -360, 
 				RotateAnimation.RELATIVE_TO_SELF, 0.5f,
 				RotateAnimation.RELATIVE_TO_SELF, 0.5f);
 		downAnimation.setDuration(300);
 		downAnimation.setFillAfter(true);
 	}
-	
+
+	//初始化底布局，与头布局同理
 	private void initFooterView() {
 		footerView = View.inflate(getContext(), R.layout.foot_custom_listview, null);
-		footerView.measure(0, 0);//主动通知系统去测量该view;
+		footerView.measure(0, 0);
 		footerViewHeight = footerView.getMeasuredHeight();
 		footerView.setPadding(0, -footerViewHeight, 0, 0);
 		addFooterView(footerView);
@@ -106,24 +158,28 @@ public class CustomRefreshListView extends ListView implements OnScrollListener{
 	public boolean onTouchEvent(MotionEvent ev) {
 		switch (ev.getAction()) {
 		case MotionEvent.ACTION_DOWN:
+			//获取按下时y坐标
 			downY = (int) ev.getY();
 			break;
 		case MotionEvent.ACTION_MOVE:
 			
 			if(currentState==REFRESHING){
+				//如果当前处在滑动状态，则不做处理
 				break;
 			}
-			
+			//手指滑动偏移量
 			int deltaY = (int) (ev.getY() - downY);
-			
+
+			//获取新的padding值
 			int paddingTop = -headerViewHeight + deltaY;
 			if(paddingTop>-headerViewHeight && getFirstVisiblePosition()==0){
+				//向下滑，且处于顶部，设置padding值，该方法实现了顶布局慢慢滑动显现
 				headerView.setPadding(0, paddingTop, 0, 0);
-//				Log.e("RefreshListView", "paddingTop: "+paddingTop);
-				
+
 				if(paddingTop>=0 && currentState==PULL_REFRESH){
 					//从下拉刷新进入松开刷新状态
 					currentState = RELEASE_REFRESH;
+					//刷新头布局
 					refreshHeaderView();
 				}else if (paddingTop<0 && currentState==RELEASE_REFRESH) {
 					//进入下拉刷新状态
@@ -139,14 +195,19 @@ public class CustomRefreshListView extends ListView implements OnScrollListener{
 			break;
 		case MotionEvent.ACTION_UP:
 			if(currentState==PULL_REFRESH){
-				//隐藏headerView
+				//仍处于下拉刷新状态，未滑动一定距离，不加载数据，隐藏headView
 				headerView.setPadding(0, -headerViewHeight, 0, 0);
 			}else if (currentState==RELEASE_REFRESH) {
+				//滑倒一定距离，显示无padding值得headcView
 				headerView.setPadding(0, 0, 0, 0);
+				//设置状态为刷新
 				currentState = REFRESHING;
+
+				//刷新头部布局
 				refreshHeaderView();
 				
 				if(listener!=null){
+					//接口回调加载数据
 					listener.onPullRefresh();
 				}
 			}

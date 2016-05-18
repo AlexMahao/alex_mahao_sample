@@ -14,8 +14,7 @@
     <TextView
         android:id="@+id/chat_left_msg"
         android:gravity="center"
-        android:paddingLeft="20dp"
-        android:paddingRight="10dp"
+
         android:text="dsadsadsasdasdasd"
         android:textColor="#fff"
         android:layout_marginLeft="10dp"

@@ -1,4 +1,4 @@
-package com.mahao.alex.systemwidgetdemo.chat;
+package com.mahao.alex.systemwidgetdemo.listView.chat;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -39,6 +39,7 @@ public class ChatListViewActivity extends AppCompatActivity {
         mChatLv.postDelayed(new Runnable() {
             @Override
             public void run() {
+                //设置我们ListView显示在底部
                 mChatLv.setSelection(adapter.getCount());
             }
         },200);

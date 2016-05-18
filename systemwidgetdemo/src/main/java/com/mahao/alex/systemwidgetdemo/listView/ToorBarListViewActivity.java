@@ -32,13 +32,22 @@ public class ToorBarListViewActivity extends AppCompatActivity implements View.O
 
     private List<String> datas  = new ArrayList<>();
 
+    //系统默认的滑动最小偏移量
     private int mTouchSlop;
+
+    //手指初次触摸时的Y坐标
     private float mFirstY;
+
+    //当前手指触摸的Y坐标
     private float mCurrentY;
+
+    //手指移动的方向，0代表向下滑动，1代表向上滑动
     private int direction;
 
+    //toobar的显示状态
     private boolean isShow = true;
 
+    //toobar显示和隐藏的动画
     private Animator mAnimator;
 
     @Override
@@ -46,25 +55,27 @@ public class ToorBarListViewActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview_toobar);
 
+        // 把toolbar替代ActionBar
         mToolBar = ((Toolbar) findViewById(R.id.toolbar));
-
         setSupportActionBar(mToolBar);
 
         mLv = ((ListView) findViewById(R.id.listview_toolbar_lv));
-
         initDatas();
 
         mAdapter = new SimpleBaseAdapter(datas);
 
         mLv.setAdapter(mAdapter);
 
-       addHeadView();
+        /**
+         * 添加一个头部View,不然使用RelativeLayout，会被遮挡
+         */
+        addHeadView();
 
 
-        //最小移动距离
+        //最小移动距离，判断是否滑动
         mTouchSlop = ViewConfiguration.get(this).getScaledTouchSlop();
 
-
+        //设置触摸监听
         mLv.setOnTouchListener(this);
     }
 
@@ -72,13 +83,13 @@ public class ToorBarListViewActivity extends AppCompatActivity implements View.O
      * 添加头布局，避免被遮挡
      */
     private void addHeadView() {
+
+        //创建一个与ToolBar等高的空白view，添加到ListView的头布局中
         View head = new View(this);
-
         TypedArray actionbarSizeTypedArray = getApplicationContext().obtainStyledAttributes(new int[] { android.R.attr.actionBarSize });
-
         head.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, (int) actionbarSizeTypedArray.getDimension(0, 0)));
 
-        mLv.addHeaderView(head);
+       // mLv.addHeaderView(head);
     }
 
     private void initDatas() {
@@ -92,8 +103,8 @@ public class ToorBarListViewActivity extends AppCompatActivity implements View.O
         switch (event.getAction()){
 
             case MotionEvent.ACTION_DOWN:
+                //记录初次触摸的Y坐标
                 mFirstY = event.getY();
-
                 break;
             case MotionEvent.ACTION_MOVE:
                 mCurrentY = event.getY();
@@ -105,12 +116,13 @@ public class ToorBarListViewActivity extends AppCompatActivity implements View.O
                     direction = 1;
                 }
                 if(direction==1){
-                    //向上滑动，隐藏toolbar
+                    //向上滑动，且toolbar在显示状态，则隐藏
                     if(isShow){
                         toolbarAnim(false);
                         isShow = !isShow;
                     }
                 }else if(direction==0){
+                    //向下滑动，且toolbar在隐藏状态，则显示
                     if(!isShow){
                         toolbarAnim(true);
                         isShow = !isShow;
@@ -130,12 +142,14 @@ public class ToorBarListViewActivity extends AppCompatActivity implements View.O
             mAnimator.cancel();
         }
 
-
         if(isShow){
+            //显现toobar
             mAnimator = ObjectAnimator.ofFloat(mToolBar,"translationY",mToolBar.getTranslationY(),0);
         }else{
+            //隐藏toobar
             mAnimator = ObjectAnimator.ofFloat(mToolBar,"translationY",mToolBar.getTranslationY(),-mToolBar.getHeight());
         }
+        //启动动画
         mAnimator.start();
     }
 }

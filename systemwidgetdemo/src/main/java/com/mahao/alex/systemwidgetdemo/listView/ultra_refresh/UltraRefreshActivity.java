@@ -1,4 +1,4 @@
-package com.mahao.alex.systemwidgetdemo.ultra_refresh;
+package com.mahao.alex.systemwidgetdemo.listView.ultra_refresh;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,10 +6,13 @@ import android.view.View;
 
 import com.mahao.alex.systemwidgetdemo.R;
 
+import in.srain.cube.views.ptr.PtrClassicDefaultHeader;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
+import in.srain.cube.views.ptr.PtrUIHandler;
+import in.srain.cube.views.ptr.indicator.PtrIndicator;
 
 /**
  * Created by Alex_MaHao on 2016/5/18.
@@ -36,7 +39,7 @@ public class UltraRefreshActivity extends Activity {
 
         ptrFrame.setDurationToCloseHeader(1000);//关闭头部的时间 // default is false
 
-        ptrFrame.setPullToRefresh(false);//当下拉到一定距离时，自动刷新（true），显示释放以刷新（）
+        ptrFrame.setPullToRefresh(false);//当下拉到一定距离时，自动刷新（true），显示释放以刷新（false）
 
         ptrFrame.setKeepHeaderWhenRefresh(true);//见名只意
 
@@ -61,5 +64,6 @@ public class UltraRefreshActivity extends Activity {
                 }, 1500);
             }
         });
+
     }
 }

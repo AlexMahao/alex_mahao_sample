@@ -1,12 +1,16 @@
-package com.mahao.alex.systemwidgetdemo.chat;
+package com.mahao.alex.systemwidgetdemo.listView.chat;
 
 import android.graphics.drawable.Drawable;
 
 /**
+ * 聊天的实体类
  * Created by Alex_MaHao on 2016/5/18.
  */
 public class ChatBean {
 
+    /**
+     * 聊天的两种类型，自己和朋友
+     */
     public static final int CHAT_MYSELF = 0;
     public static final int CHAT_FIRENDS = 1;
 

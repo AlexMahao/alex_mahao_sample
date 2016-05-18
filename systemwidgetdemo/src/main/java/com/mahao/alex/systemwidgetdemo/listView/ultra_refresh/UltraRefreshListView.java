@@ -1,4 +1,4 @@
-package com.mahao.alex.systemwidgetdemo.ultra_refresh;
+package com.mahao.alex.systemwidgetdemo.listView.ultra_refresh;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.mahao.alex.systemwidgetdemo.R;
 
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 
@@ -27,6 +28,9 @@ public class UltraRefreshListView extends ListView implements PtrHandler,AbsList
     private View footView;
 
 
+    /**
+     * 是否正在加载数据
+     */
     private boolean isLoadData = false;
 
     /**
@@ -54,10 +58,7 @@ public class UltraRefreshListView extends ListView implements PtrHandler,AbsList
         setOnScrollListener(this);
     }
 
-    @Override
-    public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-        return !isLoadData&&checkContentCanBePulledDown(frame, content, header);
-    }
+
 
     @Override
     public void onRefreshBegin(PtrFrameLayout frame) {
@@ -72,11 +73,19 @@ public class UltraRefreshListView extends ListView implements PtrHandler,AbsList
     }
 
 
-
-    public static boolean checkContentCanBePulledDown(PtrFrameLayout frame, View content, View header) {
-        return !canChildScrollUp(content);
+    @Override
+    public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+        //  PtrHandler 的接口回调，是否能够加载数据的判断
+        return !isLoadData&&checkContentCanBePulledDown(frame, content, header);
     }
 
+    // 从PtrHandler的默认实现类 PtrDefaultHandler中找到的，用以判断是否可以下拉刷新
+    public static boolean checkContentCanBePulledDown(PtrFrameLayout frame, View content, View header) {
+        return !canChildScrollUp(content);
+
+    }
+
+    // 从PtrHandler的默认实现类 PtrDefaultHandler中找到的，用以判断是否可以下拉刷新
     public static boolean canChildScrollUp(View view) {
         if (android.os.Build.VERSION.SDK_INT < 14) {
             if (view instanceof AbsListView) {
@@ -110,12 +119,10 @@ public class UltraRefreshListView extends ListView implements PtrHandler,AbsList
         /*Log.i("info","isLoadData:"+isLoadData+" totalItemCount "+totalItemCount+" firstVisibleItem "+
                 firstVisibleItem+" visibleItemCount "+ visibleItemCount);
 */
-
+        //加载更多的判断
         if(totalItemCount>1&&!isLoadData&&totalItemCount==firstVisibleItem+visibleItemCount){
             isRefresh =false;
-
             isLoadData = true;
-
             addFooterView(footView);
             mUltraRefreshListener.addMore();
         }
@@ -123,10 +130,11 @@ public class UltraRefreshListView extends ListView implements PtrHandler,AbsList
 
 
 
+    //刷新完成的后调用此方法还原布局
     public void refreshComplete(){
         isLoadData = false;
         if(isRefresh){
-
+            //获取其父控件，刷新
             ViewParent parent = getParent();
             if(parent instanceof PtrClassicFrameLayout){
                 ((PtrClassicFrameLayout) parent).refreshComplete();

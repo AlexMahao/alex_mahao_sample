@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.mahao.alex.systemwidgetdemo.custom_refresh.CustomRefreshListView
+    <com.mahao.alex.systemwidgetdemo.listView.custom_refresh.CustomRefreshListView
         android:id="@+id/lv"
 
         android:layout_width="match_parent"

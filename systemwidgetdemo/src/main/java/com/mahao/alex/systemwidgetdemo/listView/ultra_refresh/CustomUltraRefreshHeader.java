@@ -1,4 +1,4 @@
-package com.mahao.alex.systemwidgetdemo.ultra_refresh;
+package com.mahao.alex.systemwidgetdemo.listView.ultra_refresh;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -143,7 +143,7 @@ public class CustomUltraRefreshHeader extends RelativeLayout implements PtrUIHan
         }
 
        /* if (currentPos < mOffsetToRefresh && lastPos >= mOffsetToRefresh) {
-            if (isUnderTouch && status == PtrFrameLayout.PTR_STATUS_PREPARE) {*/
-        Log.i("info","isUnderTouch"+isUnderTouch+"headHeight: "+headerHeight+" lastPosY "+lastPosY+" offsetToRefresh "+offsetToRefresh+" offsetY "+offsetY+" currentPosY "+currentPosY);
+            if (isUnderTouch && status == PtrFrameLayout.PTR_STATUS_PREPARE) {*//*
+        Log.i("info","isUnderTouch"+isUnderTouch+"headHeight: "+headerHeight+" lastPosY "+lastPosY+" offsetToRefresh "+offsetToRefresh+" offsetY "+offsetY+" currentPosY "+currentPosY);*/
     }
 }
