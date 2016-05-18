@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal" >
+    
+    <RelativeLayout android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content">
+        
+        <ImageView android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/iv_arrow"
+            android:background="@mipmap/indicator_arrow"
+            android:layout_height="wrap_content"/>
+        
+        <ProgressBar android:layout_width="30dp"
+            android:layout_centerInParent="true"
+            android:layout_height="30dp"
+            android:visibility="invisible"
+            android:id="@+id/pb_rotate"
+            android:indeterminateDuration="1000"
+           	android:indeterminateDrawable="@drawable/indeterminate_drawable"
+            />
+        
+    </RelativeLayout>
+    
+    <LinearLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:layout_marginLeft="15dp"
+        android:orientation="vertical">
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:id="@+id/tv_state"
+            android:textColor="#aa000000"
+            android:text="下拉刷新"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:id="@+id/tv_time"
+            android:textColor="@android:color/darker_gray"
+            android:text="最后刷新："/>
+        
+    </LinearLayout>
+
+</LinearLayout>
