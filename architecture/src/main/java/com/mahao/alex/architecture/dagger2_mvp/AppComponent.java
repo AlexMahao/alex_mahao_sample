@@ -2,7 +2,6 @@ package com.mahao.alex.architecture.dagger2_mvp;
 
 import android.content.Context;
 
-import com.mahao.alex.architecture.dagger2.User;
 
 import javax.inject.Singleton;
 
@@ -19,5 +18,4 @@ public interface AppComponent {
 
     SPUtils spUtils();
 
-    User getUser();
 }
