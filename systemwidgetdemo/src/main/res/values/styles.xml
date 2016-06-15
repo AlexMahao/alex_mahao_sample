@@ -1,11 +1,32 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!-- 该字段设置dialog 的颜色-->
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景透明 -->
+    </style>
+
+
+
+    <style name="DialogAnim" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_anim_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_anim_exit</item>
+
+    </style>
 </resources>
