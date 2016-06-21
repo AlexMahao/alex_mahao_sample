@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class SimpleExpandListViewActivity extends AppCompatActivity {
 
-
     private ExpandableListView listview;
 
     private List<College> colleges;
