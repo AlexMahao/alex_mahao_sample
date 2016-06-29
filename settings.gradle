@@ -1,1 +1,1 @@
-include ':app', ':systemwidgetdemo', ':customviewdemo', ':utils', ':animationdemo', ':designpattern', ':arithmetic', ':architecture', ':system4compent'
+include ':app', ':systemwidgetdemo', ':customviewdemo', ':utils', ':animationdemo', ':designpattern', ':arithmetic', ':architecture', ':system4compent', ':networklib'
