@@ -1,5 +1,6 @@
 package com.example.networklib;
 
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -186,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public static void postForm() {
 
-        RequestBody formBody = new FormBody.Builder()
+            RequestBody formBody = new FormBody.Builder()
                 .add("name", "1234")
                 .build();
 
