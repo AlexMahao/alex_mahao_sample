@@ -18,4 +18,7 @@ public class Person {
         Log.i("dagger","create");
     }
 
+    public Person(String name){
+        Log.i("dagger",name);
+    }
 }
