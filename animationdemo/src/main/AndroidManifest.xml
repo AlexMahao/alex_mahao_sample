@@ -9,7 +9,9 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name=".layout_transition.LayoutTransitionActivity">
+        <activity android:name=".svg.SVGMain2Activity"
+
+            >
 
             <intent-filter>
 

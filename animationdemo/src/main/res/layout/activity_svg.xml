@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!-- 用以显示SVG 图案和动画-->
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_width="300dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+
+            />
+
+        <EditText
+            android:id="@+id/edit1"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:hint="Email"
+            android:paddingStart="4dp"
+            android:textColor="?android:colorAccent"
+            android:textColorHint="@color/colorPrimary"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/edit2"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/edit1"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:hint="Email"
+            android:paddingStart="4dp"
+            android:textColor="?android:colorAccent"
+            android:textColorHint="@color/colorPrimary"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="dsadsadsadssadsad" />
+</LinearLayout>

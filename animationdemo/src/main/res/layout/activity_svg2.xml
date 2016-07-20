@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:colorPrimary"
+    android:gravity="center"
+    android:onClick="lost_focus">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="150dp"
+            android:layout_height="24dp"
+            android:onClick="animate"
+            android:src="@drawable/search_bar" />
+
+        <EditText
+            android:id="@+id/text"
+            android:layout_width="121dp"
+            android:layout_height="22dp"
+            android:alpha="0"
+            android:background="@null"
+            android:paddingStart="4dp"
+            android:textColor="?android:colorAccent"
+            android:textSize="12sp" />
+
+    </FrameLayout>
+
+</LinearLayout>

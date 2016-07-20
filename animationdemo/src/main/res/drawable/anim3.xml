@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/edit_login">
+    <target
+        android:name="bar"
+        android:animation="@animator/anim_bar_empty" />
+    <target
+        android:name="round"
+        android:animation="@animator/anim_default_gone" />
+    <target
+        android:name="right"
+        android:animation="@animator/anim_default" />
+    <target
+        android:name="round2"
+        android:animation="@animator/anim_round2" />
+    <target
+        android:name="bar2"
+        android:animation="@animator/anim_bar_fill2" />
+</animated-vector>

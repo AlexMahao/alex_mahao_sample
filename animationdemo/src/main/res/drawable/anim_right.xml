@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/edit_login">
+
+    <target
+        android:name="round"
+        android:animation="@animator/anim_round" />
+
+    <target
+        android:animation="@animator/anim_aa"
+        android:name="right"/>
+
+</animated-vector>
