@@ -100,12 +100,12 @@ public class View5 extends View{
 
         if(currentValue>1){
             currentValue = 0;
+
+            measure.getPosTan(measure.getLength()*currentValue,pos,tan);
+
+            matrix.reset();
+
         }
-
-        measure.getPosTan(measure.getLength()*currentValue,pos,tan);
-
-        matrix.reset();
-
         float degress = (float) (Math.atan2(tan[1],tan[0])*180/Math.PI);
 
         matrix.postRotate(degress,mBitmap.getWidth()/2,mBitmap.getHeight()/2);
