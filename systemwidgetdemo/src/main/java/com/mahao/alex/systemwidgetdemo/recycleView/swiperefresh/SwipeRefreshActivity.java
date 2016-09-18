@@ -80,6 +80,9 @@ public class SwipeRefreshActivity extends AppCompatActivity implements LoadDataS
 
         mSwipeRefresh.setOnRefreshListener(mController);
 
+        /*
+        mSwipeRefresh.setRefreshing(true);*/
+
     }
 
     @Override

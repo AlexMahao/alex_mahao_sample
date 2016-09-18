@@ -68,6 +68,7 @@ public class CoverFlowViewPager extends RelativeLayout implements OnPageSelectLi
                 return mViewPager.dispatchTouchEvent(event);
             }
         });
+
     }
 
     /**
