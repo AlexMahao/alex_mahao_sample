@@ -66,13 +66,13 @@ public abstract class BaseRecycleAdapter<T> extends RecyclerView.Adapter<BaseRec
 
         if(isHasHeader&&isHasFooter){
             // 有头布局和底部时，向前便宜一个，且最后一个不能绑定数据
-            if(position==datas.size()+1){
+            if(position==0 ||position==datas.size()+1){
                 return;
             }
             bindData(holder,position-1);
         }
 
-        if(isHasHeader&&!isHasFooter){
+        if(position!=0&&isHasHeader&&!isHasFooter){
             // 有顶部，但没有底部
             bindData(holder,position-1);
         }
@@ -124,7 +124,6 @@ public abstract class BaseRecycleAdapter<T> extends RecyclerView.Adapter<BaseRec
         if(isHasHeader&&position==0){
             return ITEM_TYPE_HEADER;
         }
-
         if(isHasHeader&&isHasFooter&&position==datas.size()+1){
             // 有头部和底部时，最后底部的应该等于size+!
             return ITEM_TYPE_FOOTER;
@@ -132,7 +131,6 @@ public abstract class BaseRecycleAdapter<T> extends RecyclerView.Adapter<BaseRec
             // 没有头部，有底部，底部索引为size
             return ITEM_TYPE_FOOTER;
         }
-
         return ITEM_TYPE_NORMAL;
     }
 
