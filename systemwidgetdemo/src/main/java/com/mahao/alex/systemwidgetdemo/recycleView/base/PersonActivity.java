@@ -29,7 +29,9 @@ public class PersonActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_person);
 
         mRecycler = ((RecyclerView) findViewById(R.id.reycler));
@@ -37,19 +39,15 @@ public class PersonActivity extends AppCompatActivity {
 
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-
         mRecycler.setLayoutManager(manager);
-
 
         mPersons = new ArrayList<>();
 
         for(int i = 0 ;i <50;i++){
-
             mPersons.add(new Person(i+""));
         }
 
         mAdapter = new PersonAdapter(mPersons);
-
 
         mRecycler.setAdapter(mAdapter);
 

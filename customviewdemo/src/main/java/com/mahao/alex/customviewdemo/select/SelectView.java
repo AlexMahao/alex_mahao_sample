@@ -9,9 +9,12 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.OverScroller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +45,7 @@ public class SelectView extends View {
      */
     private List<String> mValueList = new ArrayList<>();
 
+
     private float mPointX = 0f;
 
 
@@ -53,8 +57,6 @@ public class SelectView extends View {
     private int mMiddleValue;
 
     private float mLastX;
-
-    private float mXOffset;
 
 
     /**
@@ -72,6 +74,22 @@ public class SelectView extends View {
      */
     private OnSelectListener l;
 
+    /**
+     * 滑动控制
+     */
+    private OverScroller mScroll;
+
+    /**
+     * 最小滑动速率
+     */
+    private int mMinVelocity;
+
+    /**
+     * 速度测量
+     */
+    private VelocityTracker mVelocityTracker;
+    private int mMaxVelocity;
+
     public SelectView(Context context) {
         this(context, null);
     }
@@ -82,7 +100,16 @@ public class SelectView extends View {
 
     public SelectView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+
+        mScroll = new OverScroller(context);
+
+        // 系统默认的最小速度
+        mMinVelocity = ViewConfiguration.get(context).getScaledMinimumFlingVelocity();
+
+        mMaxVelocity = ViewConfiguration.get(context).getScaledMaximumFlingVelocity();
         setValue();
+
         initPaint();
     }
 
@@ -91,7 +118,7 @@ public class SelectView extends View {
      * 初始化Value 的值
      */
     private void setValue() {
-        for (int i = 0; i < 5001; i = i + 100) {
+        for (int i = 0; i < 100001; i = i + 100) {
             mValueList.add("" + i);
         }
 
@@ -176,13 +203,24 @@ public class SelectView extends View {
     }
 
     /**
+     * 设置数据
+     * @param value
+     */
+    public void setDate(String value){
+
+        mPointX = (float) Double.parseDouble(value);
+
+        startAnim();
+    }
+
+    /**
      * 回调方法
      * 在onDraw()方法中回调
      */
     private void callback() {
         int current = (int) (Math.rint(mPointX / mUnit));
 
-        if (mMiddleValue - current < 0 || mMiddleValue - current > mMaxValue ) {
+        if (mMiddleValue - current < 0 || mMiddleValue - current > mMaxValue) {
             return;
         }
         l.onSelect(mValueList.get(mMiddleValue - current));
@@ -212,6 +250,7 @@ public class SelectView extends View {
     }
 
     /**
+     * 以mMiddleValue 的距离为中心，此时mPointX为0
      * 画出刻度和红线
      *
      * @param canvas
@@ -253,10 +292,18 @@ public class SelectView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+
         // 关键点
         float x = event.getX();
+        if (mVelocityTracker == null) {
+            mVelocityTracker = VelocityTracker.obtain();
+        }
+        mVelocityTracker.addMovement(event);
+
 
         switch (event.getAction()) {
+
 
             case MotionEvent.ACTION_DOWN:
                 // 按下不做任何操作
@@ -264,7 +311,7 @@ public class SelectView extends View {
                 break;
             case MotionEvent.ACTION_MOVE:
 
-                mXOffset = x - mLastX; // x 轴较上一次的偏移量
+                float mXOffset = x - mLastX; // x 轴较上一次的偏移量
 
                 mPointX = mPointX + mXOffset; // x的总偏移量
 
@@ -278,14 +325,52 @@ public class SelectView extends View {
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
                 // 自动依附
-                startAnim();
 
+                if (!countVelocityTracker(event))//控制快速滑动
+                    startAnim();
 
                 break;
         }
         mLastX = x;
 
         return true;
+    }
+
+    @Override
+    public void computeScroll() {
+
+        if (mScroll.computeScrollOffset()) {
+            float mPointXoff = (mScroll.getFinalX() - mScroll.getCurrX());
+            mPointX = mPointX + mPointXoff * functionSpeed();
+            startAnim();
+
+        }
+        super.computeScroll();
+    }
+
+
+    /**
+     * 控制滑动速度
+     *
+     * @return
+     */
+    private float functionSpeed() {
+        return 0.5f;
+    }
+
+
+    /**
+     * 控制快速滑动
+     */
+    private boolean countVelocityTracker(MotionEvent event) {
+        mVelocityTracker.computeCurrentVelocity(1000, 5000);
+        float xVelocity = mVelocityTracker.getXVelocity();
+        if (Math.abs(xVelocity) > mMinVelocity) {
+            mScroll.fling(0, 0, (int) xVelocity, 0, Integer.MIN_VALUE,
+                    Integer.MAX_VALUE, 0, 0);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -349,7 +434,6 @@ public class SelectView extends View {
             super.applyTransformation(interpolatedTime, t);
 
             mPointX = fromX + (desX - fromX) * interpolatedTime;//计算动画每贞滑动的距离
-
             invalidate();
 
 
