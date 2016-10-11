@@ -2,6 +2,7 @@ package com.mahao.alex.alex_mahao_sample;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -27,5 +28,9 @@ public class MainActivity extends AppCompatActivity {
         imgPath.add("1");
         Intent intent = new Intent(this,Main2Activity.class);
         startActivity(intent);
+
+
+        Handler handler = new Handler();
+        handler.sendEmptyMessage()
     }
 }

@@ -1,10 +1,7 @@
 package com.mahao.alex.utils.json;
 
-import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by mdw on 2016/6/6.
@@ -15,7 +12,12 @@ public class OrgJSONTest {
 
 
     public static void main(String[] args) {
-        JSONObject obj = new JSONObject(json);//最外层的JSONObject对象
+        JSONObject obj = null;//最外层的JSONObject对象
+        try {
+            obj = new JSONObject(json);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
         JSONObject user = obj.optJSONObject("user");

@@ -2,6 +2,8 @@ package com.mahao.alex.utils.json.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -58,7 +60,7 @@ public class GsonTest {
         System.out.println(json);
     }
 
-    public static void parserArray(){
+    public static void parserArray() throws JSONException {
         String json = "{\"user\":[{\"name\":\"alex\",\"age\":18,\"isMan\":true},{\"name\":\"mahao\",\"age\":16,\"isMan\":true}]}";
 
         //1， 获取对应实体类对象的字符串，当前为user的值。
@@ -77,7 +79,7 @@ public class GsonTest {
     }
 
 
-    public static void  parserObject(){
+    public static void  parserObject() throws JSONException {
 
          String json = "{\"user\":{\"name\":\"alex\",\"age\":18,\"isMan\":true}}";
 

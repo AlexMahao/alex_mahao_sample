@@ -30,6 +30,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:recyclerview-v7:23.0.0'
-    compile 'com.android.support:design:23.0.0'
+    compile 'com.android.support:design:24.1.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
 }
