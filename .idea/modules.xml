@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/arithmetic/arithmetic.iml" filepath="$PROJECT_DIR$/arithmetic/arithmetic.iml" />
       <module fileurl="file://$PROJECT_DIR$/customviewdemo/customviewdemo.iml" filepath="$PROJECT_DIR$/customviewdemo/customviewdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/designpattern/designpattern.iml" filepath="$PROJECT_DIR$/designpattern/designpattern.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hardware/hardware.iml" filepath="$PROJECT_DIR$/hardware/hardware.iml" />
       <module fileurl="file://$PROJECT_DIR$/ndkdemo/ndkdemo.iml" filepath="$PROJECT_DIR$/ndkdemo/ndkdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/networklib/networklib.iml" filepath="$PROJECT_DIR$/networklib/networklib.iml" />
       <module fileurl="file://$PROJECT_DIR$/system4compent/system4compent.iml" filepath="$PROJECT_DIR$/system4compent/system4compent.iml" />

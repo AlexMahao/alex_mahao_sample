@@ -3,4 +3,45 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!-- 淡蓝色-->
+    <color name="blue">#3d9eff</color>
+
+    <!-- 橙色 -->
+    <color name="orange">#ff6900</color>
+
+
+    <!-- 按钮橙色-->
+    <color name="btn_orange">#feb003</color>
+
+    <!-- 背景灰色-->
+    <color name="gray_bg">#f4f4f4</color>
+
+    <!-- 底部菜单栏边界-->
+    <color name="gray_menu_border">#aaaaaa</color>
+
+    <color name="gray_detail_underline">#b0b0b0</color>
+
+    <color name="gray_underline">#efeff4</color>
+    <!--文本白色 -->
+    <color name="text_white">#fff</color>
+
+    <!-- 文本黑色-->
+    <color name="text_black">#333</color>
+
+    <!-- 文本红色-->
+    <color name="text_red">#f00</color>
+
+    <!-- 文本灰色-->
+    <color name="text_gray">#aaa</color>
+
+    <!--文本蓝色-->
+    <color name="text_blue" >#3d9eff</color>
+    <!-- 白色-->
+    <color name="white">#fff</color>
+
+    <color name="gray_rect">#666</color>
+
+    <color name = "gray_line">#d3d3d3</color>
+    <color name="transparent">#6fff</color>
 </resources>
