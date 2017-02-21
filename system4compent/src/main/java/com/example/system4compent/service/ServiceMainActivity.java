@@ -1,6 +1,5 @@
 package com.example.system4compent.service;
 
-import android.app.IntentService;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -27,6 +26,10 @@ import com.example.system4compent.R;
  *    - 两者都是运行在主线程
  *    - 如果在Activity 中启动线程， 则线程不可控，且不可共享
  *    - Service 可以与多个Activity绑定，获取到Service 对象，便于操作线程
+ *
+ *
+ *  service使用总结：
+ *
  *
  * Created by MH on 2016/6/20.
  */
