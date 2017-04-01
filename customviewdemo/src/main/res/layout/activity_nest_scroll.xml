@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mahao.alex.customviewdemo.nestscroll.NestScrollLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:gravity="center"
+        android:textColor="#fff"
+        android:text="TAB 1"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+
+    <TextView
+        android:gravity="center"
+        android:textColor="#fff"
+        android:text="TAB 2"
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</com.mahao.alex.customviewdemo.nestscroll.NestScrollLinearLayout>
