@@ -11,17 +11,28 @@ import java.util.List;
  */
 public class PersonAdapter extends BaseRecycleAdapter<Person> {
 
-    public PersonAdapter(List<Person> datas) {
-        super(datas);
+    public PersonAdapter(List<Person> data) {
+        super(data);
     }
 
     @Override
-    protected void bindData(BaseViewHolder holder, int position) {
-        ((TextView) holder.getView(R.id.name)).setText(datas.get(position).getName());
+    protected void bindData(BaseViewHolder holder, int position, int itemType) {
+        ((TextView) holder.getView(R.id.name)).setText(mData.get(position).getName());
     }
 
     @Override
-    public int getLayoutId() {
+    public int getLayoutId(int itemType) {
+        if (itemType == ITEM_TYPE_GROUP) {
+            return R.layout.item_person2;
+        }
         return R.layout.item_person;
+    }
+
+    @Override
+    public int getItemType(int position) {
+        if (position % 5 == 0) {
+            return ITEM_TYPE_GROUP;
+        }
+        return super.getItemType(position);
     }
 }

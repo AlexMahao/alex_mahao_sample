@@ -49,17 +49,21 @@ public class NestScrollLinearLayout extends LinearLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mFirstChildHeight = getChildAt(0).getMeasuredHeight();
+
+        // 每次重绘时，重新计算recycleView的高度
+        log("mFirstChildHeight:"+mFirstChildHeight);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        log("onSizeChanged");
     }
 
     @Override
     public boolean onNestedFling(View target, float velocityX, float velocityY, boolean consumed) {
         log("onNestedFling velocityY=" + velocityY);
         // 子类滑动后
-       /* if (getScrollY() > 0 && velocityY < 0) {
-            // 向下滑动且header 隐藏，父类处理滑动
-            fling((int) velocityY);
-            return true;
-        }*/
         return false;
     }
 
@@ -116,15 +120,17 @@ public class NestScrollLinearLayout extends LinearLayout {
                     mConsumeHeight = mFirstChildHeight;
                 }
                 scrollTo(0, mConsumeHeight);
-                ViewGroup.LayoutParams params = getChildAt(2).getLayoutParams();
-                params.height = getChildAt(2).getMeasuredHeight() + dy;
-                log("recycleView ++++++++++++++++++++++height = " + params.height);
-                getChildAt(2).setLayoutParams(params);
                 consumed[1] = dy;
+                ViewGroup.LayoutParams params = getChildAt(2).getLayoutParams();
+                params.height = getMeasuredHeight()-mFirstChildHeight+mConsumeHeight;
+                getChildAt(2).setLayoutParams(params);
+                invalidate();
             }
         }
-        //log("dx=" + dx + "  dy=" + dy + "  consumed=" + consumed[0] + " " + consumed[1]);
+        log("first:"+getChildAt(0).getMeasuredHeight());
+        log("dx=" + dx + "  dy=" + dy + "  consumed=" + consumed[0] + " " + consumed[1]);
     }
+
 
     @Override
     public void onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
@@ -137,14 +143,12 @@ public class NestScrollLinearLayout extends LinearLayout {
             }
             scrollTo(0, mConsumeHeight);
             ViewGroup.LayoutParams params = getChildAt(2).getLayoutParams();
-            params.height = getChildAt(2).getMeasuredHeight() + dyUnconsumed;
-            log("recycleView -------------------height = " + params.height);
+            params.height = getMeasuredHeight()-mFirstChildHeight+mConsumeHeight;
             getChildAt(2).setLayoutParams(params);
+            invalidate();
         }
-
+        log("first:"+getChildAt(0).getMeasuredHeight());
         // 消费的和未被消息的
-
-
         // 滚动之后的回调 ，子类违背消费的
         //log("dxConsumed=" + dxConsumed + "  dyConsumed=" + dyConsumed + "  dxUnconsumed=" + dxUnconsumed + "  dyUnconsumed=" + dyUnconsumed);
     }
