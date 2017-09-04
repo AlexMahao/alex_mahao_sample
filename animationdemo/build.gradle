@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion '25.0.0'
 
     defaultConfig {
@@ -20,8 +20,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:23.+'
+    compile 'com.android.support:appcompat-v7:25.3.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:recyclerview-v7:23.3.0'
+    compile 'com.android.support:recyclerview-v7:25.3.0'
+    compile 'com.android.support:support-dynamic-animation:25.3.0'
 }
